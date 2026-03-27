@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot name="simple_arm">
+
+  <!-- ========= Materials (RViz 색상용) ========= -->
+  <material name="gray"><color rgba="0.6 0.6 0.6 1"/></material>
+  <material name="blue"><color rgba="0.2 0.2 0.9 1"/></material>
+  <material name="orange"><color rgba="0.95 0.55 0.1 1"/></material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry><box size="0.20 0.20 0.05"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry><box size="0.20 0.20 0.05"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.010" ixy="0.0" ixz="0.0"
+               iyy="0.010" iyz="0.0"
+               izz="0.010"/>
+    </inertial>
+  </link>
+
+  <link name="link1">
+    <visual>
+      <origin xyz="0.20 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.40 0.06 0.06"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0.20 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.40 0.06 0.06"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.20 0 0.05" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0"
+               iyy="0.005" iyz="0.0"
+               izz="0.005"/>
+    </inertial>
+  </link>
+
+  <link name="link1_yaw">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="0.005"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="0.005"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <link name="link2">
+    <visual>
+      <origin xyz="0.15 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.30 0.05 0.05"/></geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin xyz="0.15 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.30 0.05 0.05"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.15 0 0.05" rpy="0 0 0"/>
+      <mass value="0.7"/>
+      <inertia ixx="0.003" ixy="0.0" ixz="0.0"
+               iyy="0.003" iyz="0.0"
+               izz="0.003"/>
+    </inertial>
+  </link>
+
+  <joint name="joint1_z" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1_yaw"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint1_y" type="revolute">
+    <parent link="link1_yaw"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="10" velocity="1.5"/>
+  </joint>
+
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0.40 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.5"/>
+  </joint>
+
+  <link name="link3">
+    <visual>
+        <origin xyz="0.10 0 0.05" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.20 0.05 0.05"/>
+        </geometry>
+        <material name="blue">
+        <color rgba="0 0 1 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <origin xyz="0.10 0 0.05" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.20 0.05 0.05"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0.10 0 0.05" rpy="0 0 0"/>
+        <mass value="0.3"/>
+        <inertia
+        ixx="0.001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.001"
+        iyz="0.0"
+        izz="0.001"/>
+    </inertial>
+    </link>
+
+    <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="0.30 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.5"/>
+    </joint>
+
+</robot>
