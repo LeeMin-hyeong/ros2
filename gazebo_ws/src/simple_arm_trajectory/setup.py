@@ -27,6 +27,8 @@ setup(
         'controller_state_monitor = simple_arm_trajectory.controller_state_monitor:main',
         'send_waypoint = simple_arm_trajectory.send_waypoint:main',
         'waypoint_action_follower = simple_arm_trajectory.waypoint_action_follower:main',
+        'trajectory_monitor = simple_arm_trajectory.trajectory_monitor:main',
+        'repeat_monitor = simple_arm_trajectory.repeat_monitor:main',
         ],
     },
 )

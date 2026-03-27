@@ -25,10 +25,10 @@ class WaypointActionFollower(Node):
         self.joint_names = ["joint1_z", "joint1_y", "joint2", "joint3"]
 
         self.waypoints = [
-            [0.0, 0.10,  0.0, 0.0],
-            [0.2, 0.30,  0.0, 0.0],
-            [0.0, 0.40, -0.2, 0.0],
-            [-0.2, 0.20, 0.0, 0.0],
+            [0.0, 0.4, 0.0, 0.0],
+            [0.4, 0.4, 0.0, 0.0],
+            [0.4, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0],
         ]
 
         self.action_name = f"/{self.controller_name}/follow_joint_trajectory"
